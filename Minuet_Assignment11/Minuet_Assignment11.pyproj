@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a9c3b06-2649-402f-bc5c-4357e45a26ca</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Main_Package\Main.py</StartupFile>
+    <StartupFile>Main_Package\main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -32,7 +32,7 @@
     <Compile Include="Main_Package\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Main_Package\Main.py" />
+    <Compile Include="Main_Package\main.py" />
     <Compile Include="Output_Package\file_writer.py" />
     <Compile Include="Output_Package\__init__.py">
       <SubType>Code</SubType>
