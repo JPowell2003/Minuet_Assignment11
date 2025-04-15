@@ -42,8 +42,10 @@ class Cleaner:
         '''
         Returns the clean fuel purchase dataframe
         '''
+        return self.cleaned_data if self.cleaned_data is not None else self.data
 
     def get_anomalies(self):
         '''
         Returns the Pepsi purchases data frame
         '''
+        return self.anomalies if self.anomalies is not None else pd.DataFrame()
