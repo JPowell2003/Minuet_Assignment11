@@ -19,9 +19,7 @@ class Cleaner:
         '''
         Removes duplicate rows from the dataset and updates internal DataFrame
         '''
-        df = pd.read_csv(filepath)
-        df_cleaned = df.drop_duplicates()
-        df_cleaned.to_csv(filepath, index=False)
+        self.data = self.data.drop_duplicates()
 
     def separate_pepsi_purchase(self):
         '''
