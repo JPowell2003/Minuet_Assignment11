@@ -12,7 +12,5 @@ if __name__ == "__main__":
     # Load and print the CSV data
     data = loader.load_csv()
     print("CSV Data Loaded Successfully:")
-       
- 
 
 
