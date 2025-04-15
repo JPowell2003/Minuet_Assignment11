@@ -15,10 +15,13 @@ class Cleaner:
         self.cleaned_data = None
         self.anomalies = None
 
-    def remove_duplicates(self):
+    def remove_duplicates(self, filepath):
         '''
         Removes duplicate rows from the dataset and updates internal DataFrame
         '''
+        df = pd.read_csv(filepath)
+        df_cleaned = df.drop_duplicates()
+        df_cleaned.to_csv(filepath, index=False)
 
     def separate_pepsi_purchase(self):
         '''

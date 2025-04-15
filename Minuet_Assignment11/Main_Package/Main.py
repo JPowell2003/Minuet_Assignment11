@@ -3,6 +3,7 @@
 from Input_Package.file_loader import FileLoader 
 
 
+
 if __name__ == "__main__":
     
     file_path = "data/fuelPurchaseData.csv"  # Adjust path if necessary
