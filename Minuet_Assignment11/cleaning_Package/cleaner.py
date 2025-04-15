@@ -3,12 +3,17 @@
 # Remove Pepsi purchases and save them seperately: https://www.geeksforgeeks.org/how-to-drop-rows-in-dataframe-by-conditions-on-column-values/
 # Format Gross Price to 2 decimal places: https://sparkbyexamples.com/pandas/pandas-dataframe-round-method/
 
+import pandas as pd
+
 class Cleaner:
-    def __init__(self,dataframe):
+    def __init__(self,raw_data):
         '''
-        Initialize with the raw DataFrame and stores original data for cleaning
+        Initialize the Cleaner with raw data from FileLoader.
+        Converts list of dictionaries to a DataFrame and prepares it for cleaning.
         '''
-        self.data = dataframe
+        self.data = pd.DataFrame(raw_data)
+        self.cleaned_data = None
+        self.anomalies = None
 
     def remove_duplicates(self):
         '''
@@ -19,15 +24,25 @@ class Cleaner:
         '''
         Splits the Dataframe between valid fuel purchases and Pepsi then stores them both
         '''
+        if "Fuel Type" in self.data.columns:
+            self.anomalies = self.data[self.data["Fuel Type"] == "Pepsi"]
+            self.cleaned_data = self.data[self.data["Fuel Type"] != "Pepsi"]
+        else:
+            self.cleaned_data = self.data.copy()
+            self.anomalies = pd.DataFrame()
 
     def format_gross_price(self):
         '''
         Formats the Gross Pay column to two decimal places
         '''
+        if "Gross Price" in self.data.columns:
+           self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce")
+    
     def get_clean_data(self):
         '''
         Returns the clean fuel purchase dataframe
         '''
+
     def get_anomalies(self):
         '''
         Returns the Pepsi purchases data frame
