@@ -4,31 +4,34 @@
 # Logs how many records were written and how many were cleaned
 # Ensure columns match original format
 
+import pandas as pd
+
 class FileWriter:
     def __init__(self, cleaned_df, anomalies_df):
-        '''
-        Store the cleaned and anomaly data for writing
-        '''
+        self.cleaned_df = cleaned_df
+        self.anomalies_df = anomalies_df
 
-    def write_cleaned_data(self, filepath):
-        '''
-        Writes the cleaned fuel data to 'cleanedData.csv'
-        Logs how many rows were written
-        '''
+    def write_cleaned_data(self, filepath="cleanedData.csv"):
+        self.cleaned_df.to_csv(filepath, index=False)
+        print("Cleaned data written to '{}'".format(filepath))
+        print("Rows written: {}".format(len(self.cleaned_df)))
 
-    def write_anomalies(self, filepath):
-        '''
-        Writes the Pepsi anomalies to 'dataAnomalies.csv'
-        Logs how many rows were written
-        '''
+    def write_anomalies(self, filepath="dataAnomalies.csv"):
+        self.anomalies_df.to_csv(filepath, index=False)
+        print("Anomaly data written to '{}'".format(filepath))
+        print("Rows written: {}".format(len(self.anomalies_df)))
 
     def get_row_counts(self):
-        '''
-        Returns a dictionary or tuple with counts of total cleaned rows and total pepsi rows
-        '''
+        return {
+            "cleaned_rows": len(self.cleaned_df),
+            "pepsi_rows": len(self.anomalies_df)
+        }
 
     def validate_columns(self, reference_columns):
-        '''
-        Ensures that the cleaned and anomaly data use the same columns
-        as the original input file. Reorders or fills columns if necessary
-        '''
+        for df_name in ["cleaned_df", "anomalies_df"]:
+            df = getattr(self, df_name)
+            for col in reference_columns:
+                if col not in df.columns:
+                    df[col] = None
+            df = df[reference_columns]
+            setattr(self, df_name, df)
