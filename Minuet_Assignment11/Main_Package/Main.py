@@ -58,3 +58,19 @@ if __name__ == "__main__":
                 print("  Address:", address)
                 print("  City not found")
 
+              
+
+                # Fill missing ZIP codes
+                zip_filler.fill_missing_zips(limit=5)
+
+                # Get updated data
+                updated_data = zip_filler.get_updated_data()
+
+                # Print updated data
+                print(updated_data)
+
+                # Optionally, save it back to a file
+                updated_data.to_csv("updated_data.csv", index=False)
+
+
+
