@@ -40,6 +40,7 @@ class Cleaner:
         '''
         if "Gross Price" in self.data.columns:
            self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce")
+          
     
     def get_clean_data(self):
         '''
