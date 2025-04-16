@@ -39,11 +39,25 @@ class ZipFiller:
 
     def extract_city(self, address):
         """
-        Extracts city from the address string — assumes it's second-to-last comma-separated item.
+        Tries to extract a likely city name from a messy address string using plain Python.
         """
-        parts = address.split(",")
+        parts = [p.strip() for p in address.split(",") if p.strip()]
+ 
+        for part in parts:
+            # Skip parts that contain any digits
+            if any(char.isdigit() for char in part):
+                continue
+            # Skip 2-letter states like 'OH'
+            if len(part) == 2 and part.isupper():
+                continue
+            # If it's all alphabetic or has spaces, it's likely a city
+            if all(char.isalpha() or char.isspace() for char in part):
+                return part
+ 
+        # Fallback: return second-to-last part if available
         if len(parts) >= 2:
-            return parts[-2].strip()
+            return parts[-2]
+ 
         return None
 
     def get_zip_for_city(self, city, country="US"):
@@ -62,7 +76,7 @@ class ZipFiller:
             response = requests.get(self.api_url, params=params)
             if response.status_code == 200:
                 data = response.json()
-                return data.get("results", {}).get(city, [])
+                return data.get("results", [])
             else:
                 print(f"API error {response.status_code}: {response.text}")
         except Exception as e:
@@ -82,7 +96,7 @@ class ZipFiller:
             if city:
                 zips = self.get_zip_for_city(city)
                 if zips:
-                    zip_code = zips[0].get("postal_code")
+                    zip_code = zips[0] #.get("postal_code")
                     if zip_code:
                         updated_address = f"{address.strip()} {zip_code}"
                         self.data.at[index, "Full Address"] = updated_address
