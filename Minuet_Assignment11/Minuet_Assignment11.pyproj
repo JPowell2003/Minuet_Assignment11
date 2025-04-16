@@ -21,8 +21,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Cleaning_Package\cleaner.py" />
-    <Compile Include="Cleaning_Package\__init__.py">
+    <Compile Include="Clean_Package\clean.py" />
+    <Compile Include="Clean_Package\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Input_Package\file_loader.py" />
@@ -43,7 +43,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cleaning_Package\" />
+    <Folder Include="Clean_Package\" />
     <Folder Include="Input_Package\" />
     <Folder Include="Main_Package\" />
     <Folder Include="Data\" />
