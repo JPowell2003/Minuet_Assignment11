@@ -46,15 +46,17 @@ class ZipFiller:
             return parts[-2].strip()
         return None
 
-    def get_zip_for_city(self, city, country="US"):
+    def get_zip_for_city(self, city, state="OH", country="US"):
         """
         Uses the API to retrieve ZIP codes for a given city.
+        Requires city, state, and country to be passed in.
         Returns a list of ZIP code dictionaries (may include multiple).
         Example: [{'postal_code': '44105'}, {'postal_code': '44106'}]
         """
         params = {
             "apikey": self.api_key,
             "city": city,
+            "state": state,
             "country": country
         }
 
@@ -65,6 +67,7 @@ class ZipFiller:
                 return data.get("results", {}).get(city, [])
             else:
                 print(f"API error {response.status_code}: {response.text}")
+                print("Params used:", params)
         except Exception as e:
             print(f"API request failed: {e}")
 
@@ -80,7 +83,7 @@ class ZipFiller:
         for index, address in missing_rows:
             city = self.extract_city(address)
             if city:
-                zips = self.get_zip_for_city(city)
+                zips = self.get_zip_for_city(city, state="OH")
                 if zips:
                     zip_code = zips[0].get("postal_code")
                     if zip_code:
