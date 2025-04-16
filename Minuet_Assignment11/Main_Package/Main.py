@@ -34,10 +34,10 @@ if __name__ == "__main__":
 
         # DEBUG PRINT: Show sample of each
         print("CLEANED DATA SAMPLE:")
-        print(clean_df.head())
+        print(clean_df.head(6))
 
         print("PEPSI PURCHASES SAMPLE:")
-        print(pepsi_df.head())
+        print(pepsi_df.head(6))
 
 
 

@@ -19,9 +19,7 @@ class Cleaner:
         '''
         Removes duplicate rows from the dataset and updates internal DataFrame
         '''
-        df = pd.read_csv(filepath)
-        df_cleaned = df.drop_duplicates()
-        df_cleaned.to_csv(filepath, index=False)
+        self.data = self.data.drop_duplicates()
 
     def separate_pepsi_purchase(self):
         '''
@@ -39,7 +37,8 @@ class Cleaner:
         Formats the Gross Pay column to two decimal places
         '''
         if "Gross Price" in self.data.columns:
-           self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce")
+           self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce") #Converts the gross price to a float
+           self.data["Gross Price"] = self.data["Gross Price"].round(2)
     
     def get_clean_data(self):
         '''
