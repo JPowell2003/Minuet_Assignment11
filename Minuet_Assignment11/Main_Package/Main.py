@@ -6,6 +6,7 @@ import pandas as pd
 
 from Input_Package.file_loader import FileLoader
 from Clean_Package.clean import *
+from ZipLookup_Package.zip_filler import ZipFiller
 
 if __name__ == "__main__":
     # Set path to your CSV file
@@ -39,5 +40,24 @@ if __name__ == "__main__":
         print("PEPSI PURCHASES SAMPLE:")
         print(pepsi_df.head(6))
 
+         # Create ZipFiller with cleaned DataFrame
+        zip_filler = ZipFiller(clean_df)
 
+        # Step 1: Find rows with missing ZIP codes
+        missing = zip_filler.find_missing_zip_rows(limit=5)
+
+        # Step 2: For each missing row, extract city and get ZIP codes
+        print("Rows with missing ZIP codes:")
+        for index, address in missing:
+            city = zip_filler.extract_city(address)
+            if city:
+                zip_codes = zip_filler.get_zip_for_city(city)
+                print("Row", index)
+                print("  Address:", address)
+                print("  City:", city)
+                print("  ZIP Codes:", zip_codes)
+            else:
+                print("Row", index)
+                print("  Address:", address)
+                print("  City not found")
 
