@@ -37,7 +37,8 @@ class Cleaner:
         Formats the Gross Pay column to two decimal places
         '''
         if "Gross Price" in self.data.columns:
-           self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce")
+           self.data["Gross Price"] = pd.to_numeric(self.data["Gross Price"], errors="coerce") #Converts the gross price to a float
+           self.data["Gross Price"] = self.data["Gross Price"].round(2)
     
     def get_clean_data(self):
         '''
