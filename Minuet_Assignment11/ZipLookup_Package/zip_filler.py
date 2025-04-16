@@ -13,7 +13,7 @@ class ZipFiller:
         """
         self.data = dataframe 
         self.api_key = "9c401f50-1a1f-11f0-9e9c-b3ffac1ed18c"
-        self.api_url = "https://app.zipcodebase.com/api/v1/search"
+        self.api_url = "https://app.zipcodebase.com/api/v1/code/city"
 
     def find_missing_zip_rows(self, limit=5):
         """
