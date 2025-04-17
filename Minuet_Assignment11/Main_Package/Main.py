@@ -1,3 +1,15 @@
+# File Name : Minuet_Assignment11
+# Student Name: Shantele King
+# email:  King4sl@mail.uc.edu, 
+# Assignment Number: Assignment11
+# Due Date: 04/17/2025
+# Course #/Section:  4010-001
+# Semester/Year:  Spring 2025
+# Brief Description of the assignment: In this assignment we made eddits to a csv file and then ran code to present the final changes and reqiured information wanted from the data set.
+# Brief Description of what this module does:
+# Citations: ChatGPT
+# Anything else that's relevant: N/A
+
 import sys
 import pandas as pd
 
